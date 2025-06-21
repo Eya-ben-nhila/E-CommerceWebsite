@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | LuxCart</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Additional Auth-specific Styles */
+    .auth-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(100vh - 160px);
+      padding: 2rem 0;
+    }
+    
+    .auth-card {
+      background-color: var(--lighter);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 3rem;
+      width: 100%;
+      max-width: 480px;
+    }
+    
+    .auth-card h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    
+    .auth-subtitle {
+      text-align: center;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+    }
+    
+    .auth-form {
+      margin-bottom: 2rem;
+    }
+    
+    .auth-form .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .auth-form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .auth-form input {
+      width: 100%;
+      padding: 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    
+    .auth-form input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    
+    .forgot-password {
+      display: block;
+      text-align: right;
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+    }
+    
+    .auth-btn {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+      color: var(--secondary);
+    }
+    
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .auth-divider span {
+      padding: 0 1rem;
+    }
+    
+    .auth-social {
+      width: 100%;
+      padding: 0.875rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      font-weight: 500;
+    }
+    
+    .auth-social img {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .auth-footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--secondary);
+    }
+    
+    /* Responsive */
+    @media (max-width: 640px) {
+      .auth-card {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          LuxCart
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-card">
+      <h1>Welcome Back</h1>
+      <p class="auth-subtitle">Sign in to access your account and shopping cart</p>
+      
+      <form class="auth-form" id="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required>
+          <a href="#" class="text-link forgot-password">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary auth-btn">Sign In</button>
+      </form>
+      
+      <div class="auth-divider">
+        <span>or</span>
+      </div>
+      
+      <button class="btn btn-outline auth-social">
+        <font>Continue with Google</font>
+        
+      </button>
+      
+      <p class="auth-footer">
+        Don't have an account? <a href="register.html" class="text-link">Sign up</a>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <!-- Same footer as index.html -->
+  </footer>
+
+  <script src="auth.js"></script>
+</body>
+</html>

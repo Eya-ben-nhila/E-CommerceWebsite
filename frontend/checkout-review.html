@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Order | LuxCart</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Review Page Styles Matching Cart */
+    .checkout-header {
+      margin: 2rem 0 3rem;
+    }
+    
+    .checkout-steps {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--secondary);
+      position: relative;
+    }
+    
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: calc(100% + 8px);
+      width: 2rem;
+      height: 1px;
+      background-color: var(--border);
+    }
+    
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--light);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .step.active .step-number {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    .step.completed .step-number {
+      background-color: var(--success);
+      color: white;
+      border-color: var(--success);
+    }
+    
+    .step-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .step.active .step-title,
+    .step.completed .step-title {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    /* Review Sections */
+    .review-section {
+      background-color: var(--lighter);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .review-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .review-section h2 {
+      font-size: 1.25rem;
+      color: var(--dark);
+    }
+    
+    .edit-btn {
+      color: var(--primary);
+      font-weight: 500;
+      cursor: pointer;
+    }
+    
+    .review-details {
+      line-height: 1.6;
+    }
+    
+    .review-details p {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .review-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Same header as cart.html -->
+  </header>
+
+  <main class="container">
+    <div class="checkout-header">
+      <h1>Checkout</h1>
+      <div class="checkout-steps">
+        <div class="step completed">
+          <div class="step-number"><i class="fas fa-check"></i></div>
+          <div class="step-title">Shipping</div>
+        </div>
+        <div class="step completed">
+          <div class="step-number"><i class="fas fa-check"></i></div>
+          <div class="step-title">Payment</div>
+        </div>
+        <div class="step active">
+          <div class="step-number">3</div>
+          <div class="step-title">Review</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checkout-container">
+      <div class="checkout-form">
+        <div class="review-section">
+          <div class="review-section-header">
+            <h2>Shipping Information</h2>
+            <span class="edit-btn" onclick="location.href='checkout.html'">Edit</span>
+          </div>
+          <div class="review-details">
+            <p><strong>John Doe</strong></p>
+            <p>123 Main Street</p>
+            <p>Apartment 4B</p>
+            <p>New York, NY 10001</p>
+            <p>United States</p>
+            <p>+1 (555) 123-4567</p>
+            <p>john.doe@example.com</p>
+          </div>
+        </div>
+
+        <div class="review-section">
+          <div class="review-section-header">
+            <h2>Shipping Method</h2>
+            <span class="edit-btn" onclick="location.href='checkout.html'">Edit</span>
+          </div>
+          <div class="review-details">
+            <p><strong>Free Shipping</strong></p>
+            <p>Arrives in 3-5 business days</p>
+          </div>
+        </div>
+
+        <div class="review-section">
+          <div class="review-section-header">
+            <h2>Payment Method</h2>
+            <span class="edit-btn" onclick="location.href='checkout-payment.html'">Edit</span>
+          </div>
+          <div class="review-details">
+            <p><strong>Visa ending in 4242</strong></p>
+            <p>Expires 04/2025</p>
+          </div>
+        </div>
+
+        <div class="checkout-actions">
+          <a href="checkout-payment.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back to Payment</a>
+          <button class="btn btn-primary" onclick="placeOrder()">Place Order</button>
+        </div>
+      </div>
+
+      <!-- Order Summary (same as cart.html) -->
+      <div class="order-summary">
+        <!-- Same order summary as cart.html -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <!-- Same footer as cart.html -->
+  </footer>
+
+  <script>
+    // Place Order Function
+    function placeOrder() {
+      // In a real implementation, you would process the order here
+      // For demo purposes, we'll show a confirmation
+      alert('Order placed successfully!');
+      localStorage.removeItem('cart');
+      window.location.href = 'order-confirmation.html';
+    }
+  </script>
+</body>
+</html>

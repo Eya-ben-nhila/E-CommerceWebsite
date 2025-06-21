@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation | LuxCart</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Order Confirmation Specific Styles */
+    .confirmation-container {
+      max-width: 800px;
+      margin: 3rem auto;
+      text-align: center;
+    }
+    
+    .confirmation-icon {
+      width: 100px;
+      height: 100px;
+      background-color: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+    }
+    
+    .confirmation-icon i {
+      color: white;
+      font-size: 3rem;
+    }
+    
+    .confirmation-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+    
+    .confirmation-header p {
+      font-size: 1.1rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+    }
+    
+    .order-details {
+      background-color: var(--lighter);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: var(--shadow-sm);
+      text-align: left;
+    }
+    
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+    
+    .detail-label {
+      color: var(--secondary);
+    }
+    
+    .detail-value {
+      font-weight: 500;
+    }
+    
+    .order-summary {
+      margin-top: 3rem;
+      text-align: left;
+    }
+    
+    .confirmation-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 3rem;
+    }
+    
+    @media (max-width: 768px) {
+      .confirmation-container {
+        padding: 0 1.5rem;
+      }
+      
+      .confirmation-actions {
+        flex-direction: column;
+      }
+      
+      .confirmation-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          LuxCart
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="#" class="nav-link">Shop</a></li>
+          <li><a href="#" class="nav-link">Collections</a></li>
+          <li><a href="#" class="nav-link">About</a></li>
+          <li><a href="login.html" class="nav-link">Account</a></li>
+          <li>
+            <a href="cart.html" class="nav-link cart-btn">
+              <i class="fas fa-shopping-bag"></i>
+              <span class="cart-count">0</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="confirmation-container">
+      <div class="confirmation-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      
+      <div class="confirmation-header">
+        <h1>Order Confirmed!</h1>
+        <p>Thank you for your purchase. Your order has been received and is being processed.</p>
+      </div>
+      
+      <div class="order-details">
+        <div class="detail-row">
+          <span class="detail-label">Order Number</span>
+          <span class="detail-value">#LX-2023-456789</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Date</span>
+          <span class="detail-value">June 15, 2023</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Total</span>
+          <span class="detail-value">$1,035.48</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Payment Method</span>
+          <span class="detail-value">Visa ending in 4242</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Shipping Address</span>
+          <span class="detail-value">
+            123 Main Street<br>
+            Apartment 4B<br>
+            New York, NY 10001
+          </span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Estimated Delivery</span>
+          <span class="detail-value">June 20 - June 22, 2023</span>
+        </div>
+      </div>
+      
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        <div class="products-grid" style="grid-template-columns: 1fr; gap: 1rem; margin-top: 1.5rem;">
+          <div class="product-card" style="flex-direction: row; align-items: center; padding: 1rem;">
+            <div class="product-image-container" style="width: 80px; height: 80px; margin-right: 1rem;">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Premium Wireless Headphones">
+            </div>
+            <div class="product-info" style="flex: 1;">
+              <h3 class="product-title">Premium Wireless Headphones</h3>
+              <div class="product-price">
+                <span class="current-price">$349.99</span>
+                <span style="margin: 0 1rem;">×</span>
+                <span>1</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="product-card" style="flex-direction: row; align-items: center; padding: 1rem;">
+            <div class="product-image-container" style="width: 80px; height: 80px; margin-right: 1rem;">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Luxury Smart Watch">
+            </div>
+            <div class="product-info" style="flex: 1;">
+              <h3 class="product-title">Luxury Smart Watch</h3>
+              <div class="product-price">
+                <span class="current-price">$599.99</span>
+                <span style="margin: 0 1rem;">×</span>
+                <span>1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="confirmation-actions">
+        <a href="index.html" class="btn btn-outline">
+          <i class="fas fa-arrow-left"></i> Continue Shopping
+        </a>
+        
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            LuxCart
+          </div>
+          <p class="footer-description">
+            We bring you the finest selection of premium products with exceptional customer service and fast shipping.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">Shop</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">All Products</a></li>
+            <li><a href="#" class="footer-link">Featured</a></li>
+            <li><a href="#" class="footer-link">New Arrivals</a></li>
+            <li><a href="#" class="footer-link">Sale Items</a></li>
+            <li><a href="#" class="footer-link">Gift Cards</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">Customer Service</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Contact Us</a></li>
+            <li><a href="#" class="footer-link">FAQs</a></li>
+            <li><a href="#" class="footer-link">Shipping & Returns</a></li>
+            <li><a href="#" class="footer-link">Size Guide</a></li>
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">About</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Our Story</a></li>
+            <li><a href="#" class="footer-link">Sustainability</a></li>
+            <li><a href="#" class="footer-link">Careers</a></li>
+            <li><a href="#" class="footer-link">Press</a></li>
+            <li><a href="#" class="footer-link">Wholesale</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 LuxCart. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Update cart count to 0 since order is complete
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('.cart-count').textContent = '0';
+    });
+  </script>
+</body>
+</html>

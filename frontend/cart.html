@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Shopping Cart | LuxCart</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Cart-specific styles */
+    .cart-container {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .cart-items {
+      background-color: var(--lighter);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .cart-item {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    
+    .cart-item-image {
+      width: 100px;
+      height: 100px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    
+    .cart-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .cart-item-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .cart-item-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .cart-item-price {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+    
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .quantity-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--lighter);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .quantity-btn:hover {
+      background-color: var(--border);
+    }
+    
+    .quantity-display {
+      min-width: 30px;
+      text-align: center;
+    }
+    
+    .remove-btn {
+      background: none;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+    
+    .cart-summary {
+      background-color: var(--lighter);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 100px;
+    }
+    
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 1.5rem 0;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .empty-cart-message {
+      text-align: center;
+      padding: 3rem;
+      color: var(--secondary);
+    }
+    
+    .empty-cart-message i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--border);
+    }
+    
+    .cart-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    
+    .btn-empty-cart {
+      background-color: var(--danger-light);
+      color: var(--danger);
+    }
+    
+    .btn-empty-cart:hover {
+      background-color: var(--danger);
+      color: white;
+    }
+    
+    @media (max-width: 768px) {
+      .cart-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .cart-item {
+        grid-template-columns: 80px 1fr;
+        grid-template-rows: auto auto;
+      }
+      
+      .cart-item-price {
+        grid-column: 1 / 3;
+      }
+      
+      .cart-actions {
+        flex-direction: column-reverse;
+        gap: 1rem;
+      }
+      
+      .cart-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          LuxCart
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="#" class="nav-link">Shop</a></li>
+          <li><a href="#" class="nav-link">Collections</a></li>
+          <li><a href="#" class="nav-link">About</a></li>
+          <li><a href="login.html" class="nav-link">Account</a></li>
+          <li>
+            <a href="cart.html" class="nav-link cart-btn">
+              <i class="fas fa-shopping-bag"></i>
+              <span class="cart-count">0</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>Your Shopping Cart</h1>
+      <p>Review your items and proceed to checkout</p>
+    </div>
+
+    <div class="cart-container">
+      <div class="cart-items" id="cart-items-container">
+        <div class="cart-header">
+          <h2>Your Items</h2>
+          <button class="btn btn-outline btn-empty-cart" id="empty-cart-btn">
+            <i class="fas fa-trash"></i> Empty Cart
+          </button>
+        </div>
+        <div id="cart-items-list">
+          <!-- Cart items will be loaded here by JavaScript -->
+        </div>
+      </div>
+
+      <div class="cart-summary">
+        <h2>Order Summary</h2>
+        <div class="summary-details">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span id="shipping">Free</span>
+          </div>
+          <div class="summary-row">
+            <span>Tax</span>
+            <span id="tax">$0.00</span>
+          </div>
+          <div class="summary-total">
+            <span>Total</span>
+            <span id="total">$0.00</span>
+          </div>
+        </div>
+
+        <div class="promo-code">
+          <input type="text" placeholder="Promo Code" id="promo-code">
+          <button class="btn btn-outline">Apply</button>
+        </div>
+
+        <div class="cart-actions">
+          <a href="index.html" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Continue Shopping
+          </a>
+          <a href="checkout.html" class="btn btn-primary" id="checkout-btn">
+            Proceed to Checkout <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            LuxCart
+          </div>
+          <p class="footer-description">
+            We bring you the finest selection of premium products with exceptional customer service and fast shipping.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">Shop</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">All Products</a></li>
+            <li><a href="#" class="footer-link">Featured</a></li>
+            <li><a href="#" class="footer-link">New Arrivals</a></li>
+            <li><a href="#" class="footer-link">Sale Items</a></li>
+            <li><a href="#" class="footer-link">Gift Cards</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">Customer Service</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Contact Us</a></li>
+            <li><a href="#" class="footer-link">FAQs</a></li>
+            <li><a href="#" class="footer-link">Shipping & Returns</a></li>
+            <li><a href="#" class="footer-link">Size Guide</a></li>
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">About</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Our Story</a></li>
+            <li><a href="#" class="footer-link">Sustainability</a></li>
+            <li><a href="#" class="footer-link">Careers</a></li>
+            <li><a href="#" class="footer-link">Press</a></li>
+            <li><a href="#" class="footer-link">Wholesale</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 LuxCart. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize cart when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        loadCartItems();
+        document.getElementById('empty-cart-btn').addEventListener('click', emptyCart);
+    });
+
+    // Main function to load and display cart items
+    function loadCartItems() {
+        const cart = getCart();
+        const cartItemsList = document.getElementById('cart-items-list');
+        
+        if (cart.length === 0) {
+            showEmptyCart();
+            return;
+        }
+        
+        renderCartItems(cart);
+        updateCartSummary(cart);
+        updateCartCount();
+        updateCheckoutButton();
+    }
+
+    // Helper function to get cart from localStorage
+    function getCart() {
+        return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+
+    // Show empty cart message
+    function showEmptyCart() {
+        document.getElementById('cart-items-list').innerHTML = `
+            <div class="empty-cart-message">
+                <i class="fas fa-shopping-bag"></i>
+                <h3>Your cart is empty</h3>
+                <p>Looks like you haven't added any items to your cart yet.</p>
+                <a href="index.html" class="btn btn-primary">Start Shopping</a>
+            </div>
+        `;
+        document.getElementById('empty-cart-btn').style.display = 'none';
+    }
+
+    // Render all cart items
+    function renderCartItems(cart) {
+        let itemsHTML = '';
+        cart.forEach(item => {
+            itemsHTML += `
+                <div class="cart-item" data-id="${item.id}">
+                    <div class="cart-item-image">
+                        <img src="${item.image || 'https://via.placeholder.com/100'}" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-details">
+                        <h3 class="cart-item-title">${item.name}</h3>
+                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn" onclick="changeQuantity('${item.id}', -1)">-</button>
+                                <span class="quantity-display">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="changeQuantity('${item.id}', 1)">+</button>
+                            </div>
+                            <button class="remove-btn" onclick="removeFromCart('${item.id}')">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cart-item-total">
+                        $${(item.price * item.quantity).toFixed(2)}
+                    </div>
+                </div>
+            `;
+        });
+        document.getElementById('cart-items-list').innerHTML = itemsHTML;
+    }
+
+    // Update cart summary totals
+    function updateCartSummary(cart) {
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const shipping = subtotal > 50 ? 0 : 5.99;
+        const tax = subtotal * 0.09;
+        const total = subtotal + shipping + tax;
+
+        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('shipping').textContent = shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`;
+        document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    }
+
+    // Change item quantity
+    function changeQuantity(productId, change) {
+        const cart = getCart();
+        const itemIndex = cart.findIndex(item => item.id === productId);
+        
+        if (itemIndex !== -1) {
+            cart[itemIndex].quantity += change;
+            
+            if (cart[itemIndex].quantity <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+            
+            saveCart(cart);
+            loadCartItems();
+            showNotification(`Quantity updated for ${cart[itemIndex].name}`);
+        }
+    }
+
+    // Remove item from cart
+    function removeFromCart(productId) {
+        const cart = getCart();
+        const itemIndex = cart.findIndex(item => item.id === productId);
+        
+        if (itemIndex !== -1) {
+            const itemName = cart[itemIndex].name;
+            cart.splice(itemIndex, 1);
+            saveCart(cart);
+            loadCartItems();
+            showNotification(`${itemName} removed from cart`);
+        }
+    }
+
+    // Empty entire cart
+    function emptyCart() {
+        saveCart([]);
+        loadCartItems();
+        showNotification('Cart emptied successfully');
+    }
+
+    // Save cart to localStorage
+    function saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Update cart count in header
+    function updateCartCount() {
+        const cart = getCart();
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        document.querySelector('.cart-count').textContent = totalItems;
+    }
+
+    // Enable/disable checkout button
+    function updateCheckoutButton() {
+        const cart = getCart();
+        const checkoutBtn = document.getElementById('checkout-btn');
+        
+        if (cart.length === 0) {
+            checkoutBtn.classList.add('disabled');
+            checkoutBtn.onclick = (e) => {
+                e.preventDefault();
+                showNotification('Your cart is empty');
+            };
+        } else {
+            checkoutBtn.classList.remove('disabled');
+            checkoutBtn.onclick = null;
+        }
+    }
+
+    // Show notification message
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.classList.add('fade-out');
+            setTimeout(() => notification.remove(), 500);
+        }, 2000);
+    }
+</script>
+</body>
+</html>
